@@ -1,7 +1,3 @@
-//
-// Created by pirates on 20/11/23.
-//
-
 #ifndef PIRATESOS_BOOTLOADER_H
 #define PIRATESOS_BOOTLOADER_H
 /* Scalable Screen Font (https://gitlab.com/bztsrc/scalable-font2) */
