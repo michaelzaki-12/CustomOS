@@ -1,6 +1,3 @@
-//
-// Created by pirates on 20/11/23.
-//
 #include "BootHeader.h"
 bootparam_t* bootp;
 #include <stddef.h>
