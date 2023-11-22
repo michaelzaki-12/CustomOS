@@ -1,7 +1,3 @@
-//
-// Created by pirates on 20/11/23.
-//
-
 #ifndef PIRATESOS_BOOTHEADER_H
 #define PIRATESOS_BOOTHEADER_H
 #include <stdint.h>
