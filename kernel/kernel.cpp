@@ -51,8 +51,8 @@ void printString(int x, int y, char *s)
 
 extern "C" int _start(bootparam_t* bootpar){
     bootp = bootpar;
-//    printString(10, 30, B);
+    char* B = nullptr;
     printString(10, 70, (char*)"Hello From The Kernel");
-    printString(10, 100, (char*)15);
+    printString(10, 100, itoa(115, B, 10));
     return 0;
 }
