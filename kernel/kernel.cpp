@@ -1,10 +1,9 @@
-#include "BootHeader.h"
+#include "kernel.h"
+#include "EfiMemory.h"
+#include "PageFrameAllocator.h"
 bootparam_t* bootp;
-#include <stddef.h>
 
-/**
- * Display string using a bitmap font without the SSFN library
- */
+
 void printString(int x, int y, char *s)
 {
     unsigned char *ptr, *chr, *frg;
@@ -39,17 +38,34 @@ void printString(int x, int y, char *s)
             for(m = 1; j; j--, n++, o += bootp->pitch)
                 for(p = o, l = 0; l < k; l++, p += 4, m <<= 1) {
                     if(m > 0x80) { frg++; m = 1; }
-                    if(*frg & m) *((unsigned int*)p) = 0xFFFFFF;
+                    if(*frg & m) *((unsigned int*)p) = 0xFFFF00;
                 }
         }
         x += chr[4]+1; y += chr[5];
     }
 }
 
-extern "C" int _start(bootparam_t* bootpar){
+
+extern "C" int main(bootparam_t *bootpar){
     bootp = bootpar;
-    char* B = nullptr;
-    printString(10, 70, (char*)"Hello From The Kernel");
-    printString(10, 100, itoa(115, B, 10));
+    for(uint64_t x = 0; x < bootpar->width; x++){
+        for(uint64_t y = 0; y < bootpar->height; y++){
+            *((uint32_t*)(bootpar->framebuffer + 4 * bootpar->pixelsperscanline * y + 4 * x)) = 0xFFFFFFFF;
+        }
+    }
+    printString(10, 10, (char*)"Hello from \"kernel\".");
+    char* B[1024];
+    char* C[1024];
+    PageFrameAllocator* pageFrameAllocator;
+    pageFrameAllocator->ReadMemoryMap(bootpar->memory_map, bootpar->memory_map_size, bootpar->desc_size);
+//    printString(10, 80, ulltoa(pageFrameAllocator.GetFreeMemory() / 1024 / 1024, (char*)B, 10));
+    printString(10, 100,ulltoa(pageFrameAllocator->GetFreeMemory() / 1024 , (char*)C, 10));
+    printString(10, 80, ulltoa(pageFrameAllocator->GetUsedMemory() / 1024 , (char*)C, 10));
+    printString(10, 60, ulltoa(pageFrameAllocator->GetReservedMemory() / 1024, (char*)C, 10));
+    for(int i = 0; i < 20; i++){
+        uint64_t address = (uint64_t)pageFrameAllocator->RequestPage();
+        printString(10, 120 + (i * 20), ulltoa(address, (char*)C, 10));
+    }
+
     return 0;
 }
