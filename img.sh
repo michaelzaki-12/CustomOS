@@ -5,4 +5,3 @@ mmd -i fat.iso ::/EFI/BOOT
 mcopy -i fat.iso BOOTX64.EFI ::/EFI/BOOT
 mcopy -i fat.iso font.sfn ::
 mcopy -i fat.iso kernel.elf ::
-mcopy -i fat.iso image.png ::
