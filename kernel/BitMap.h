@@ -11,9 +11,9 @@
 class BitMap{
 public:
     size_t size;
-    inline static uint8_t* Buffer;
-    static bool Get(uint8_t index);
-    static void Set(uint8_t index, bool value);
+    uint8_t* Buffer;
+    bool Get(uint8_t index);
+    void Set(uint8_t index, bool value);
 
 
 };
