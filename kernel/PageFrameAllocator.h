@@ -22,7 +22,7 @@ public:
     uint64_t GetFreeMemory();
     uint64_t GetReservedMemory();
     uint64_t GetUsedMemory();
-    static inline BitMap bitmap;
+    BitMap bitmap;
 
 private:
     void InitBitmap(size_t BitmapSize, void* BufferAddress);
