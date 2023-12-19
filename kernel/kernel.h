@@ -6,9 +6,9 @@
 #define PIRATESOS_KERNEL_H
 
 #include <stdint.h>
-//typedef unsigned long long  uint64_t;
-//typedef unsigned int uint32_t;
 #include "BootHeader.h"
+
+
 char* itoa(int value, char* result, int base) {
 // check that the base if valid
     if (base < 2 || base > 36) { *result = '\0'; return result; }

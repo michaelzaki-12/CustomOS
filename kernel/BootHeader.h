@@ -23,8 +23,8 @@ typedef struct {
 } __attribute__((packed)) ssfn_font_t;
 
 typedef struct {
-    unsigned int               Type;
-    unsigned int               Pad;
+    uint32_t               Type;
+    uint32_t               Pad;
     uint64_t PhysicalStart;
     uint64_t   VirtualStart;
     uint64_t                NumberOfPages;
@@ -33,6 +33,7 @@ typedef struct {
 
 typedef struct {
     unsigned long long    framebuffer;
+    unsigned long long    framebuffersize;
     unsigned int    width;
     unsigned int    height;
     unsigned int    pitch;
@@ -41,7 +42,7 @@ typedef struct {
     char            **argv;
     ssfn_font_t* font;
     efi_memory_descriptor *memory_map;
-    unsigned long long desc_size, memory_map_size, map_key;
+    uint64_t desc_size, memory_map_size, map_key;
 } bootparam_t;
 
 
